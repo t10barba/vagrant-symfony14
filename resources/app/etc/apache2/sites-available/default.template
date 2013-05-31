@@ -1,0 +1,54 @@
+# demo
+# demo.dev
+
+<VirtualHost *:80>
+  ServerAdmin email@email.com
+  DocumentRoot "/vagrant/project/web"
+  ServerName demo.dev
+  DirectoryIndex index.php
+  Alias /sf /vagrant/project/lib/vendor/symfony/data/web/sf
+  <Directory "/vagrant/project/web/lib/vendor/symfony/data/web/sf">
+    AllowOverride All
+    Allow from All
+  </Directory>
+  <Directory "/vagrant/project/web">
+    AllowOverride All
+    Allow from All
+  </Directory>
+  ErrorLog "/vagrant/log/apache2/demo.error_log"
+  CustomLog "/vagrant/log/apache2/demo.access_log" common
+  LogLevel warn
+</VirtualHost>
+
+# multi app project
+# admin.demo
+# admin.demo.dev
+
+<VirtualHost *:80>
+    ServerAdmin email@email.com
+    DocumentRoot "/vagrant/project/web"
+    ServerName admin.demo.dev
+        <Location />
+                <IfModule mod_rewrite.c>
+                RewriteEngine On
+                RewriteBase /
+                RewriteCond %{REQUEST_FILENAME} !-f
+                RewriteCond %{REQUEST_FILENAME} !-d
+                RewriteRule . /backend.php [L]
+                </IfModule>
+        DirectoryIndex backend.php
+        </Location>
+    Alias /sf /vagrant/project/lib/vendor/symfony/data/web/sf
+    <Directory "/vagrant/project/web/lib/vendor/symfony/data/web/sf">
+        AllowOverride All
+        Allow from All
+    </Directory>
+
+   <Directory "/vagrant/project/web">
+    AllowOverride All
+    Allow from All
+   </Directory>
+    ErrorLog "/vagrant/log/apache2/admin.demo.error_log"
+    CustomLog "/vagrant/log/apache2/admin.demo.access_log" common
+    LogLevel warn
+</VirtualHost>

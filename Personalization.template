@@ -1,0 +1,20 @@
+# box base
+$base_box = "precise32"
+
+# framework
+$framework = "symfony"
+
+# vhost name (name.dev)
+$vhost = "name"
+
+# vm name
+$mv_name = $vhost + "-" + $framework + "-" + $base_box
+
+# vm ip
+$ip = "xxx.xxx.xxx.xxx"
+
+# vm memory size
+$mv_memory = 256
+
+# host path
+$local_path = "/path_to_project"
