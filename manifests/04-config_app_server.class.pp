@@ -36,6 +36,7 @@ class config_app_server
 
   # the mcrypt.ini file creates a notice when starting the php.cli,
   # removing the comment in the file fixes it
+  
   file 
   {
     'mcrypt.fix':
@@ -70,15 +71,16 @@ class config_app_server
       require => File['php5.config']
   }
   
-  if $mv_mysql == true {
-    exec
-    {
-	  'mysql.password':
-        unless => 'mysqladmin -uroot -proot status',
-        path => '/bin:/usr/bin',
-        command => 'mysqladmin -uroot password root'
-    }
+
+  /* MySQL
+  exec
+  {
+    'mysql.password':
+      unless => 'mysqladmin -uroot -proot status',
+      path => '/bin:/usr/bin',
+      command => 'mysqladmin -uroot password root'
   }
+  */
 
   file 
   {

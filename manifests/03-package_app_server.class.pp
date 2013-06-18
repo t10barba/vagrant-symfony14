@@ -14,7 +14,7 @@ class package_app_server
       ensure  => present,
   }
 
-  /*
+  /* MySQL
   package
   {
     'mysql-server':

@@ -17,6 +17,7 @@ Vagrant::Config.run do |config|
   config.vm.host_name = $vhost + ".dev"
 
   config.vm.network :hostonly, $ip
+  # Para Mac "en0: Ethernet" cambiar para otro OS
   config.vm.network :bridged, :bridge => "en0: Ethernet"
 
   # Relative path
