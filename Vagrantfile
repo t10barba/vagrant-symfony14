@@ -13,8 +13,8 @@ Vagrant.configure("2") do |config|
   end
   config.vm.network "private_network", ip: $ip
   config.vm.network "public_network", :bridge => 'en0: Ethernet'
-  config.vm.synced_folder ".", "/vagrant", :mount_options => ["dmode=777","fmode=777"]
-  config.vm.synced_folder $local_path, "/vagrant", :mount_options => ["dmode=777","fmode=777"]
+  config.vm.synced_folder ".", "/vagrant", :nfs => true
+  config.vm.synced_folder $local_path, "/vagrant", :nfs => true
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "manifests"
     puppet.manifest_file = "00-app.pp"
