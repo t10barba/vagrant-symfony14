@@ -2,7 +2,7 @@
 class config_app_server
 {
 
-  file 
+  file
   {
     'apache2.config':
       path    => '/etc/apache2/sites-available/default',
@@ -18,7 +18,7 @@ class config_app_server
       require => File['apache2.config']
   }
 
-  file 
+  file
   {
     'php5.config':
       path    => '/etc/php5/apache2/php.ini',
@@ -26,7 +26,7 @@ class config_app_server
       source  => '/vagrant/resources/app/etc/php5/apache2/php.ini'
   }
 
-  file 
+  file
   {
     'php5cli.config':
       path    => '/etc/php5/cli/php.ini',
@@ -36,8 +36,8 @@ class config_app_server
 
   # the mcrypt.ini file creates a notice when starting the php.cli,
   # removing the comment in the file fixes it
-  
-  file 
+
+  file
   {
     'mcrypt.fix':
       path    => '/etc/php5/conf.d/mcrypt.ini',
@@ -45,51 +45,14 @@ class config_app_server
       require => File['php5.config']
   }
 
-  /*
-  file 
-  {
-    'xdebug.config':
-      path    => '/etc/php5/conf.d/xdebug.ini',
-      source  => '/vagrant/resources/app/etc/php5/conf.d/xdebug.ini',
-      require => File['php5.config']
-  }
-  
-  file 
-  {
-    'xdebugcli.config':
-      path    => '/etc/php5/cli/conf.d/xdebug.ini',
-      source  => '/vagrant/resources/app/etc/php5/cli/conf.d/xdebug.ini',
-      require => File['php5cli.config']
-  }
-  */
-
-  file 
-  {
-    'phpmyadmin.apacheconfig':
-      path    => '/etc/apache2/conf.d/apache.conf',
-      ensure  => '/etc/phpmyadmin/apache.conf',
-      require => File['php5.config']
-  }
-  
-
-  /* MySQL
-  exec
-  {
-    'mysql.password':
-      unless => 'mysqladmin -uroot -proot status',
-      path => '/bin:/usr/bin',
-      command => 'mysqladmin -uroot password root'
-  }
-  */
-
-  file 
+  file
   {
     'system.logdir':
       path    => '/vagrant/log',
       ensure  => directory
   }
 
-  file 
+  file
   {
     'apache.logdir':
       path    => '/vagrant/log/apache2',

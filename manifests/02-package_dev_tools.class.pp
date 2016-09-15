@@ -7,12 +7,6 @@ class package_dev_tools
     'git-core':
       ensure  => present
   }
-
-  package
-  {
-    'subversion':
-      ensure  => present
-  }
   
   package
   {

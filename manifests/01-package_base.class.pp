@@ -23,4 +23,11 @@ class package_base
       require => Exec['init']
   }
 
+  package
+  {
+    'apt-show-versions':
+      ensure  => present,
+      require => Exec['init']
+  }
+
 }

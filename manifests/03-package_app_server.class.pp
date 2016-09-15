@@ -14,20 +14,6 @@ class package_app_server
       ensure  => present,
   }
 
-  /* MySQL
-  package
-  {
-    'mysql-server':
-      ensure  => present
-  }
-
-  package
-  {
-    'mysql-client':
-      ensure  => present
-  }
-  */
-
   package
   {
     'php5':
@@ -48,22 +34,6 @@ class package_app_server
       ensure  => present,
       require => Package['php5']
   }
-  
-  /*
-  package
-  {
-    'php5-xdebug':
-      ensure  => present,
-      require => Package['php5']
-  }
-
-  package
-  {
-    'kcachegrind':
-      ensure  => present,
-      require => Package['php5-xdebug']
-  }
-  */
 
   package
   {
@@ -71,7 +41,7 @@ class package_app_server
       ensure  => present,
       require => Package['php5']
   }
-  
+
   package
   {
     'php5-xsl':
@@ -92,13 +62,6 @@ class package_app_server
       ensure  => present,
       require => Package['php5']
   }
-  
-  package
-  {
-    'phpmyadmin':
-      ensure  => present,
-      require => Package['php5']
-  }
 
   package
   {
@@ -109,25 +72,32 @@ class package_app_server
 
   package
   {
+    'php5-mcrypt':
+      ensure  => present,
+      require => Package['php5-cli']
+  }
+
+  package
+  {
     'php-pear':
       ensure  => present,
       require => Package['php5-cli']
   }
-  
+
   package
   {
     'imagemagick':
       ensure  => present,
       require => Package['php5']
   }
-  
+
   package
   {
     'php5-imagick':
       ensure  => present,
       require => Package['imagemagick']
   }
-  
+
   package
   {
     'graphviz':
@@ -150,14 +120,6 @@ class package_app_server
       path    => '/tmp/pear/cache',
       mode    => 777,
       require => File['pear.tmpdirfix.prepare']
-  }
-
-  exec
-  {
-    'pear.upgrade.pear':
-      path => '/bin:/usr/bin:/usr/sbin',
-      command => 'pear upgrade PEAR',
-      require => File['pear.tmpdirfix']
   }
 
 }

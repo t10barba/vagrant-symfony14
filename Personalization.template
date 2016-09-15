@@ -1,5 +1,5 @@
 # box base
-$base_box = "precise32"
+$base_box = "precise64"
 
 # framework
 $framework = "symfony"
